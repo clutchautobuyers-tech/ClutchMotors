@@ -501,6 +501,7 @@ img { max-width: 100%; display: block; }
   animation: spin 0.7s linear infinite;
   display: inline-block;
 }
+.spinner[hidden] { display: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Success state */
