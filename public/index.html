@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clutch Auto Buyers — We Buy Cars for Cash</title>
+  <meta name="description" content="Clutch Auto Buyers buys your car fast. Submit your vehicle details and get a cash offer today. We buy all makes and models." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <span class="logo-clutch">CLUTCH</span>
+        <span class="logo-auto">AUTO BUYERS</span>
+      </div>
+      <a href="tel:+19513941979" class="header-phone" id="header-phone">📞 Call Us Now</a>
+    </div>
+  </header>
+
+  <!-- ===== TRUST BAR ===== -->
+  <div class="trust-bar">
+    <div class="container trust-bar-inner">
+      <div class="trust-item"><span class="trust-icon">🏆</span> 15+ Years Experience</div>
+      <div class="trust-item"><span class="trust-icon">🚗</span> 500+ Cars Bought</div>
+      <div class="trust-item"><span class="trust-icon">⚡</span> Same-Day Offers</div>
+      <div class="trust-item"><span class="trust-icon">📍</span> Inland Empire Local</div>
+      <div class="trust-item"><span class="trust-icon">💰</span> No Fees Ever</div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <p class="hero-eyebrow">Fast · Fair · Hassle-Free</p>
+      <h1 class="hero-headline">We Buy Your Car<br>for <span class="accent">Top Dollar</span></h1>
+      <p class="hero-sub">Get a cash offer on your vehicle in minutes. Any make, any model, any condition.</p>
+      <a href="#quote-form" class="btn btn-primary">Get My Offer Now</a>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Three simple steps to cash in your pocket.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Submit Your Car</h3>
+          <p>Fill out the form below with your vehicle details. Takes less than 2 minutes.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Get a Call</h3>
+          <p>We'll reach out with a competitive cash offer — usually within the same day.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Get Paid</h3>
+          <p>Accept the offer and we'll handle the paperwork. Fast payment, no fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY CHOOSE US ===== -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="section-title">Why Sell to Clutch Auto Buyers?</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h3>Fast Offers</h3>
+          <p>Same-day quotes. No waiting around for weeks.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💰</div>
+          <h3>Top Dollar</h3>
+          <p>We pay competitive wholesale prices because we know the market.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🚗</div>
+          <h3>Any Vehicle</h3>
+          <p>Running or not, any make or model, any condition.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📋</div>
+          <h3>No Fees</h3>
+          <p>Zero dealer fees, zero commissions. What we offer is what you get.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE FORM ===== -->
+  <section class="form-section" id="quote-form">
+    <div class="container">
+      <h2 class="section-title">Get Your Free Cash Offer</h2>
+      <p class="section-sub">Fill out the form and we'll call you with an offer.</p>
+
+      <div class="form-card">
+        <form id="quoteForm" novalidate>
+          <!-- VIN + decoder -->
+          <div class="form-group" id="vin-group" style="margin-bottom:10px">
+            <label for="vin">VIN <span class="label-note">— auto-fills vehicle info</span></label>
+            <div class="vin-input-wrap">
+              <input type="text" id="vin" name="vin" placeholder="Enter your 17-character VIN" maxlength="17" style="text-transform:uppercase" />
+              <button type="button" id="decodeBtn" class="btn-decode">Decode</button>
+            </div>
+            <span class="decode-status" id="decode-status"></span>
+            <span class="field-error" id="vin-error"></span>
+          </div>
+
+          <div class="or-divider"><span>or enter year, make &amp; model</span></div>
+
+          <!-- Year / Make / Model (auto-filled or manual) -->
+          <div class="form-group-row" id="vehicle-details-row" style="margin-top:14px">
+            <div class="form-group">
+              <label for="year">Year</label>
+              <input type="text" id="year" name="year" placeholder="e.g. 2019" maxlength="4" />
+              <span class="field-error" id="year-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="make">Make</label>
+              <input type="text" id="make" name="make" placeholder="e.g. Toyota" />
+              <span class="field-error" id="make-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="model">Model</label>
+              <input type="text" id="model" name="model" placeholder="e.g. Camry" />
+              <span class="field-error" id="model-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group-row" style="margin-top:4px;margin-bottom:20px">
+            <div class="form-group">
+              <label for="mileage">Mileage *</label>
+              <input type="text" id="mileage" name="mileage" placeholder="e.g. 85000" />
+              <span class="field-error" id="mileage-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="condition">Condition *</label>
+              <select id="condition" name="condition" required>
+                <option value="" disabled selected>Select condition...</option>
+                <option value="Excellent">Excellent — like new, minimal wear</option>
+                <option value="Good">Good — normal wear, no major issues</option>
+                <option value="Fair">Fair — some damage or mechanical issues</option>
+                <option value="Poor">Poor — major damage or not running</option>
+              </select>
+              <span class="field-error" id="condition-error"></span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:20px">
+            <label for="ownership">Vehicle Ownership *</label>
+            <select id="ownership" name="ownership" required>
+              <option value="" disabled selected>Select one...</option>
+              <option value="Owned">I own it outright</option>
+              <option value="Financed">Financed (loan)</option>
+              <option value="Leased">Leased</option>
+            </select>
+            <span class="field-error" id="ownership-error"></span>
+          </div>
+
+          <div class="form-group" id="bank-group" style="margin-bottom:20px;display:none">
+            <label for="bank">Bank / Lender Name *</label>
+            <input type="text" id="bank" name="bank" placeholder="e.g. Chase, Wells Fargo, Credit Union..." />
+            <span class="field-error" id="bank-error"></span>
+          </div>
+
+          <!-- Optional photos -->
+          <div class="form-group" style="margin-bottom:20px">
+            <label for="photos">Photos <span class="label-note">— optional, up to 5 images</span></label>
+            <div class="photo-upload-area" id="photo-upload-area">
+              <input type="file" id="photos" name="photos" accept="image/*" multiple />
+              <div class="photo-upload-prompt" id="photo-upload-prompt">
+                <span class="photo-upload-icon">📷</span>
+                <span>Tap to add photos</span>
+                <span class="photo-upload-sub">Interior, exterior, any damage — helps us give a better offer</span>
+              </div>
+            </div>
+            <div class="photo-previews" id="photo-previews"></div>
+            <span class="field-error" id="photos-error"></span>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label for="name">Your Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="First and Last Name" required />
+            <span class="field-error" id="name-error"></span>
+          </div>
+
+          <div class="form-group-row">
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
+              <span class="field-error" id="phone-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              <span class="field-error" id="email-error"></span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit" id="submitBtn">
+            <span id="btn-text">Get My Cash Offer</span>
+            <span id="btn-spinner" class="spinner" hidden></span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div id="formSuccess" class="form-success" hidden>
+          <div class="success-icon">✓</div>
+          <h3>Request Received!</h3>
+          <p>Thanks! We'll be calling you shortly with your cash offer.</p>
+        </div>
+
+        <!-- Error banner -->
+        <div id="formError" class="form-error-banner" hidden>
+          Something went wrong. Please call us directly: <a href="tel:+19513941979" id="error-phone">Call Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2 class="section-title">What Sellers Are Saying</h2>
+      <p class="section-sub">Real people, real offers, real cash.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Moe called me the same day I submitted my Camry. Fair offer, no back and forth. Had cash in hand the next day. Couldn't have been easier."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A</div>
+            <div>
+              <div class="testimonial-name">Ahmad</div>
+              <div class="testimonial-car">2019 Toyota Camry</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I tried CarMax first and they lowballed me. Clutch came in higher and the whole process was painless. Moe is honest and straight to the point."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">J</div>
+            <div>
+              <div class="testimonial-name">Jason</div>
+              <div class="testimonial-car">2023 Honda Accord</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Super easy process. Moe was professional and never pressured me. I'd recommend Clutch Auto Buyers to anyone who wants to sell their car fast."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T</div>
+            <div>
+              <div class="testimonial-name">Tahreer</div>
+              <div class="testimonial-car">2023 Kia Soul</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Common Questions</h2>
+      <p class="section-sub">Straightforward answers — no runaround.</p>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Do you buy cars that are financed or leased?</summary>
+          <p>Yes. We buy financed and leased vehicles regularly. Just let us know your lender when you submit the form and we'll handle the payoff process.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What condition do you buy cars in?</summary>
+          <p>Any condition — running or not, minor wear, major damage, high mileage. We've seen it all with 15+ years in the business. Submit your car and we'll give you an honest offer.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How fast will I get an offer?</summary>
+          <p>We call you the same day in most cases. Once you accept, we move fast — usually wrapping everything up within 24–48 hours.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Are there any fees or commissions?</summary>
+          <p>None. Zero dealer fees, zero commissions. The number we offer you is the number you get paid.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What area do you serve?</summary>
+          <p>We're based in the Inland Empire and serve the surrounding Southern California area. Not sure if we cover your location? Call us and we'll figure it out.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do I need to sell my car?</summary>
+          <p>Your title (or loan payoff info if financed), a valid ID, and the keys. That's it. We handle the paperwork.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <span class="logo-clutch">CLUTCH</span>
+        <span class="logo-auto">AUTO BUYERS</span>
+      </div>
+      <p class="footer-tagline">Wholesale Car Buyers — Fast, Fair &amp; Local</p>
+      <p class="footer-copy">&copy; <span id="year-copy"></span> Clutch Auto Buyers. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
