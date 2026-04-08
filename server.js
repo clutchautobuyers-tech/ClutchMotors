@@ -1,11 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Trust Railway's proxy so rate limiter can identify IPs correctly
+app.set('trust proxy', 1);
 
 // Parse JSON bodies (25mb limit to support photo uploads)
 app.use(express.json({ limit: '25mb' }));
@@ -43,7 +46,7 @@ app.post('/submit-quote', submitLimiter, async (req, res) => {
     ? `Ownership: ${safe(ownership)} — ${safe(bank)}`
     : `Ownership: ${safe(ownership)}`;
 
-  const emailBody = [
+  const emailText = [
     '🚗 New Quote Request — Clutch Auto Buyers',
     '',
     `Name: ${safe(name)}`,
@@ -60,13 +63,7 @@ app.post('/submit-quote', submitLimiter, async (req, res) => {
   ].join('\n');
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-      },
-    });
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // Build photo attachments from base64 data URLs
     const attachments = Array.isArray(photos)
@@ -76,17 +73,15 @@ app.post('/submit-quote', submitLimiter, async (req, res) => {
           return {
             filename: p.name || `photo-${i + 1}.jpg`,
             content: match[2],
-            encoding: 'base64',
-            contentType: match[1],
           };
         }).filter(Boolean)
       : [];
 
-    await transporter.sendMail({
-      from: `"Clutch Auto Buyers Form" <${process.env.GMAIL_USER}>`,
+    await resend.emails.send({
+      from: 'Clutch Auto Buyers <onboarding@resend.dev>',
       to: process.env.ALERT_EMAIL,
       subject: `New Quote Request — ${safe(year)} ${safe(make)} ${safe(model)}`,
-      text: emailBody,
+      text: emailText,
       attachments,
     });
 
