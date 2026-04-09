@@ -1,5 +1,19 @@
 # Clutch Auto Buyers — Project Reference
 
+## Instructions for Claude
+READ THIS FIRST before doing anything else.
+
+This file is your entire memory for this project. Every session starts here.
+
+Rules you must follow every single session:
+1. Read this entire file before touching any code
+2. Every time you make ANY change — update the Changelog section with today's date, what you changed, and why
+3. Commit CLAUDE.md to GitHub every time you update it
+4. Keep all sections current — if something changes, update it here too
+5. Never let this file get out of date
+
+---
+
 ## Project Overview
 A landing page + quote form website for **Clutch Auto Buyers**, a wholesale car-buying business based in the Inland Empire, Southern California. The site's single job: get visitors to submit their vehicle info so the owner (Moe) can call them with a cash offer.
 
@@ -137,6 +151,7 @@ Railway environment variables are set in the Railway dashboard under the project
 
 ### 2026-04-09
 - Created `CLAUDE.md` — full project reference for future sessions
+- Added `## Instructions for Claude` section at the top — rules every session must follow before touching code
 
 ### 2026-04-08
 - Added "Text Us Now" button to header (`sms:+19513941979`) alongside "Call Us Now"
