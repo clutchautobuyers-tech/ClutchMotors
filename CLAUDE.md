@@ -1,0 +1,157 @@
+# Clutch Auto Buyers — Project Reference
+
+## Project Overview
+A landing page + quote form website for **Clutch Auto Buyers**, a wholesale car-buying business based in the Inland Empire, Southern California. The site's single job: get visitors to submit their vehicle info so the owner (Moe) can call them with a cash offer.
+
+When a visitor submits the form, the server sends an email to `clutchautobuyers@gmail.com` with all the car and contact details via the Resend API. No database — purely stateless form → email flow.
+
+Live URL: **https://www.clutchautobuyers.com**
+GitHub: https://github.com/clutchautobuyers-tech/ClutchMotors
+Deployed on: **Railway** (auto-deploys on every push to `main`)
+
+---
+
+## Tech Stack
+| Layer | Tech |
+|---|---|
+| Frontend | Plain HTML, CSS, vanilla JavaScript — no framework |
+| Backend | Node.js + Express |
+| Email | Resend (HTTPS API — required because Railway blocks SMTP ports 465/587) |
+| Rate limiting | express-rate-limit (5 submissions per IP per 15 min) |
+| Environment | dotenv |
+| Font | Inter via Google Fonts |
+| Hosting | Railway |
+| Domain | GoDaddy — `www.clutchautobuyers.com` CNAME → Railway; root domain forwards 301 → www |
+
+**Note:** `nodemailer` and `twilio` are still in `package.json` as leftover dependencies from earlier iterations but are not used. Safe to remove eventually.
+
+---
+
+## File Structure
+```
+ClutchMotors/
+├── server.js              # Express server — serves static files + POST /submit-quote
+├── package.json           # Node dependencies and npm start/dev scripts
+├── .env                   # Secrets (never commit) — RESEND_API_KEY, ALERT_EMAIL, PORT
+├── CLAUDE.md              # This file — project reference for AI sessions
+└── public/
+    ├── index.html         # Entire single-page website (all sections in one file)
+    ├── favicon.svg        # Blue square with white serif "C" monogram
+    ├── preview.jpg        # 1200×630 OG image for iMessage/social link previews
+    ├── css/
+    │   └── styles.css     # All styles — light theme, mobile-first, CSS variables
+    └── js/
+        └── main.js        # Form validation, VIN decoder, photo upload, fetch POST
+```
+
+---
+
+## What's Working
+- **Landing page** — full single-page site: header, trust bar, hero, how it works, why us, quote form, testimonials, FAQ, footer
+- **Quote form** — collects VIN (optional), year/make/model, mileage, condition, ownership (with conditional bank field for financed/leased), optional photos (up to 5, max 5MB each), name, phone, email
+- **VIN decoder** — calls NHTSA public API to auto-fill year/make/model when a 17-char VIN is entered
+- **Photo uploads** — base64 encoded, sent as email attachments via Resend (up to 5 photos)
+- **Email notifications** — Resend sends structured email to `clutchautobuyers@gmail.com` on every submission
+- **Rate limiting** — 5 requests per IP per 15 minutes, proxy-aware (`trust proxy: 1` for Railway)
+- **Form UX** — loading spinner, success state (hides form, shows confirmation), inline field validation errors, error banner with phone fallback
+- **Mobile responsive** — tested on iPhone, header fits on one line at all sizes
+- **Header CTA buttons** — "Call Us Now" (outlined) and "Text Us Now" (solid blue, `sms:` link) side by side
+- **Link previews** — Open Graph + Twitter card meta tags; `preview.jpg` is the thumbnail image shown when link is shared in iMessage/social
+- **Favicon** — Blue square "C" monogram SVG
+- **Custom domain** — `www.clutchautobuyers.com` live with HTTPS via Railway
+- **Root domain redirect** — `clutchautobuyers.com` → `www.clutchautobuyers.com` via GoDaddy 301 forward
+- **SEO/social title** — "Clutch Auto Buyers — Sell Your Car Now"
+
+---
+
+## In Progress / Known Issues
+- `nodemailer` and `twilio` are unused dependencies in `package.json` — can be removed with `npm uninstall nodemailer twilio`
+- Resend `from` address is still `onboarding@resend.dev` (the default sandbox sender). To use a custom from-address like `noreply@clutchautobuyers.com`, the domain needs to be verified in the Resend dashboard
+
+---
+
+## Design Decisions
+| Decision | Reason |
+|---|---|
+| Resend instead of Nodemailer/Gmail | Railway blocks outbound SMTP ports (465/587). Resend uses HTTPS so it always works. |
+| `app.set('trust proxy', 1)` | Required for express-rate-limit to correctly read client IPs behind Railway's reverse proxy. Without it: `ERR_ERL_UNEXPECTED_X_FORWARDED_FOR` crash. |
+| No framework (plain HTML/CSS/JS) | Easier to maintain, no build step, no dependencies to update. |
+| Light/white theme | Requested redesign — more professional and clean vs. original dark theme. |
+| No emojis — SVG icons + HTML entities | Requested — emojis look playful; SVGs are crisp and professional on all screens. |
+| CSS custom properties for all colors | Easy to retheme without hunting through the file. |
+| `sms:` link for Text Us Now | Opens native Messages app on iPhone pre-addressed to owner's number. |
+| OG preview image generated via SVG→sharp | Needed a 1200×630 JPG for iMessage link previews; SVG favicons don't work for that. |
+| GoDaddy Forward Domain (301) for root | CNAME on `@` is not allowed by DNS spec. GoDaddy's "Forward Domain" does the redirect at the registrar level. |
+
+---
+
+## How to Run Locally
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Make sure .env exists with:
+#    RESEND_API_KEY=re_...
+#    ALERT_EMAIL=clutchautobuyers@gmail.com
+#    PORT=3000
+
+# 3. Start server
+npm start
+# or for auto-restart on changes:
+npm run dev
+
+# 4. Open http://localhost:3000
+```
+
+---
+
+## Environment Variables
+| Variable | Value | Purpose |
+|---|---|---|
+| `RESEND_API_KEY` | `re_cjF5pb7P_...` | Resend API key for sending emails |
+| `ALERT_EMAIL` | `clutchautobuyers@gmail.com` | Where quote notification emails go |
+| `PORT` | `3000` locally, auto-set on Railway | Server port |
+
+---
+
+## Deployment
+Push to GitHub → Railway auto-deploys in ~1 minute.
+```bash
+git add -A && git commit -m "your message" && git push
+```
+Railway environment variables are set in the Railway dashboard under the project's Variables tab.
+
+---
+
+## Testimonials (current)
+| Name | Vehicle | Initial |
+|---|---|---|
+| Ahmad | 2019 Toyota Camry | A |
+| Jason | 2023 Honda Accord | J |
+| Tahreer | 2023 Kia Soul | T |
+| Mohammed | 2025 Tesla | M |
+
+---
+
+## Changelog
+
+### 2026-04-09
+- Created `CLAUDE.md` — full project reference for future sessions
+
+### 2026-04-08
+- Added "Text Us Now" button to header (`sms:+19513941979`) alongside "Call Us Now"
+- Fixed mobile header: logo was stacking ("CLUTCH" / "AUTO BUYERS" on two lines) — set `white-space: nowrap` and reduced font size to `0.85rem` at `max-width: 600px`
+- Fixed "Text Us Now" wrapping to two lines on mobile — added `white-space: nowrap` to `.header-sms`
+- Added Open Graph + Twitter Card meta tags for proper iMessage/social link previews
+- Generated `public/preview.jpg` (1200×630) as the OG thumbnail image
+- Pushed all changes to GitHub; Railway auto-deployed
+
+### Earlier (previous session)
+- Migrated from Nodemailer/Gmail to Resend to fix Railway SMTP port block
+- Added `app.set('trust proxy', 1)` to fix `ERR_ERL_UNEXPECTED_X_FORWARDED_FOR` rate-limit crash
+- Full visual redesign: dark theme → light/white theme
+- Removed all emojis; replaced with SVG icons (why-us cards), CSS dots (trust bar), HTML entities (stars, checkmark)
+- Changed browser tab title to "Clutch Auto Buyers — Sell Your Car Now"
+- Replaced steering wheel favicon with blue "C" monogram SVG
+- Added Mohammed testimonial (2025 Tesla, same-day cash)
+- Set up custom domain `www.clutchautobuyers.com` on Railway + GoDaddy 301 redirect for root domain
