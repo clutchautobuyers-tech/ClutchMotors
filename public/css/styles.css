@@ -748,9 +748,9 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 600px) {
   .container { padding: 0 16px; }
-  .header-inner { height: 58px; }
+  .header-inner { height: auto; padding-top: 10px; padding-bottom: 10px; }
   .logo { font-size: 1.05rem; }
-  .header-phone, .header-sms { font-size: 0.72rem; padding: 6px 10px; }
+  .header-phone, .header-sms { font-size: 0.72rem; padding: 6px 10px; white-space: nowrap; }
   .header-actions { gap: 6px; }
   .trust-bar { padding: 10px 0; }
   .trust-bar-inner { gap: 6px 16px; justify-content: flex-start; padding: 0 16px; overflow-x: auto; flex-wrap: nowrap; }
