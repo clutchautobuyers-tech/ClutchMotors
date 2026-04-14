@@ -156,6 +156,7 @@ Railway environment variables are set in the Railway dashboard under the project
 - Updated Mohammed's vehicle from "2025 Tesla" → "2025 Tesla Model Y"
 - Added Dave testimonial (2017 Kia Forte) and Oscar testimonial (2019 Kia Sorento)
 - Converted testimonials from a wrapping grid to a horizontal scroll carousel — saves vertical space, works on all screen sizes
+- Rewrote Tahreer, Mohammed, and Dave testimonials to sound more natural/authentic — kept Ahmad, Jason, and Oscar unchanged
 - Auto-scroll to success confirmation after form submit — page was staying in place, forcing user to scroll up to see it. Added `scrollIntoView({ behavior: 'smooth', block: 'center' })` after showing `#formSuccess`.
 
 ### 2026-04-09
