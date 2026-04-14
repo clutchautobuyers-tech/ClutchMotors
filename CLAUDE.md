@@ -143,7 +143,9 @@ Railway environment variables are set in the Railway dashboard under the project
 | Ahmad | 2019 Toyota Camry | A |
 | Jason | 2023 Honda Accord | J |
 | Tahreer | 2023 Kia Soul | T |
-| Mohammed | 2025 Tesla | M |
+| Mohammed | 2025 Tesla Model Y | M |
+| Dave | 2017 Kia Forte | D |
+| Oscar | 2019 Kia Sorento | O |
 
 ---
 
@@ -151,6 +153,8 @@ Railway environment variables are set in the Railway dashboard under the project
 
 ### 2026-04-13
 - Fixed browser scroll restoration — page was reopening at the last scroll position instead of the top. Added `history.scrollRestoration = 'manual'` + `window.scrollTo(0,0)` at the top of main.js.
+- Updated Mohammed's vehicle from "2025 Tesla" → "2025 Tesla Model Y"
+- Added Dave testimonial (2017 Kia Forte) and Oscar testimonial (2019 Kia Sorento)
 - Auto-scroll to success confirmation after form submit — page was staying in place, forcing user to scroll up to see it. Added `scrollIntoView({ behavior: 'smooth', block: 'center' })` after showing `#formSuccess`.
 
 ### 2026-04-09
