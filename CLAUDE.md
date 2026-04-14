@@ -149,6 +149,9 @@ Railway environment variables are set in the Railway dashboard under the project
 
 ## Changelog
 
+### 2026-04-13
+- Auto-scroll to success confirmation after form submit — page was staying in place, forcing user to scroll up to see it. Added `scrollIntoView({ behavior: 'smooth', block: 'center' })` after showing `#formSuccess`.
+
 ### 2026-04-09
 - Created `CLAUDE.md` — full project reference for future sessions
 - Added `## Instructions for Claude` section at the top — rules every session must follow before touching code

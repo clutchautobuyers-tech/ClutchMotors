@@ -276,6 +276,7 @@ form.addEventListener('submit', async (e) => {
     if (res.ok && data.success) {
       form.hidden = true;
       formSuccess.hidden = false;
+      formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } else {
       formError.hidden = false;
       setLoading(false);
