@@ -1,3 +1,7 @@
+// Always start at top of page on load
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // Set copyright year in footer
 document.getElementById('year-copy').textContent = new Date().getFullYear();
 
