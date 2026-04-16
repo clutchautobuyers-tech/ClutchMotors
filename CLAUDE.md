@@ -144,12 +144,15 @@ Railway environment variables are set in the Railway dashboard under the project
 | Jason | 2023 Honda Accord | J |
 | Tahreer | 2023 Kia Soul | T |
 | Mohammed | 2025 Tesla Model Y | M |
-| Dave | 2017 Kia Forte | D |
+| David | 2023 Kia Forte | D |
 | Oscar | 2019 Kia Sorento | O |
 
 ---
 
 ## Changelog
+
+### 2026-04-15
+- Corrected David testimonial: name was "Dave" → "David", vehicle was "2017 Kia Forte" → "2023 Kia Forte"
 
 ### 2026-04-13
 - Fixed browser scroll restoration — page was reopening at the last scroll position instead of the top. Added `history.scrollRestoration = 'manual'` + `window.scrollTo(0,0)` at the top of main.js.
