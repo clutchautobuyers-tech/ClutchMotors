@@ -152,7 +152,7 @@ Railway environment variables are set in the Railway dashboard under the project
 ## Changelog
 
 ### 2026-04-15
-- Corrected David testimonial: name was "Dave" → "David", vehicle was "2017 Kia Forte" → "2023 Kia Forte"
+- Corrected David testimonial: name was "Dave" → "David", vehicle was "2017 Kia Forte" → "2023 Kia Forte", rewrote text to remove "had some miles on it" which didn't fit a 2023
 
 ### 2026-04-13
 - Fixed browser scroll restoration — page was reopening at the last scroll position instead of the top. Added `history.scrollRestoration = 'manual'` + `window.scrollTo(0,0)` at the top of main.js.
