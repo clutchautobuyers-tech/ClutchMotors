@@ -152,7 +152,9 @@ Railway environment variables are set in the Railway dashboard under the project
 ## Changelog
 
 ### 2026-04-20
-- SEO pass: updated title tag and meta description with Inland Empire/local keywords, added canonical link, added Schema.org AutoDealer JSON-LD structured data with areaServed cities, added location text to hero sub and footer, created robots.txt and sitemap.xml
+- SEO pass: updated title tag and meta description with Inland Empire/local keywords, added canonical link, added Schema.org AutoDealer JSON-LD structured data with areaServed cities (Riverside, San Bernardino, Ontario, Fontana, Moreno Valley, Rancho Cucamonga), added location text to hero sub and footer, created robots.txt and sitemap.xml
+- Added Google Search Console verification (HTML file method) — site verified and sitemap submitted
+- Logo made slightly bigger (1.45rem desktop, 0.95rem mobile) and wrapped in `<a href="#">` to scroll back to top on tap
 
 ### 2026-04-15
 - Corrected David testimonial: name was "Dave" → "David", vehicle was "2017 Kia Forte" → "2023 Kia Forte", rewrote text to remove "had some miles on it" which didn't fit a 2023
