@@ -151,6 +151,12 @@ Railway environment variables are set in the Railway dashboard under the project
 
 ## Changelog
 
+### 2026-04-24
+- Added logo image to header: replaced CLUTCH / AUTO BUYERS text spans with `<img src="ClutchAutoBuyers.png">` (1799x874 PNG provided by user, generated via ChatGPT)
+- Created `favicon-icon.png` by cropping just the C+car icon portion from the logo PNG (Swift/AppKit crop: x=0, y=340, w=560, h=500)
+- Updated favicon link from `favicon.svg` to `favicon-icon.png`
+- Footer logo remains as text (PNG has white background — would clash with dark footer)
+
 ### 2026-04-20
 - SEO pass: updated title tag and meta description with Inland Empire/local keywords, added canonical link, added Schema.org AutoDealer JSON-LD structured data with areaServed cities (Riverside, San Bernardino, Ontario, Fontana, Moreno Valley, Rancho Cucamonga), added location text to hero sub and footer, created robots.txt and sitemap.xml
 - Added Google Search Console verification (HTML file method) — site verified and sitemap submitted
