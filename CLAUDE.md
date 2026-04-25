@@ -49,13 +49,15 @@ ClutchMotors/
 ├── .env                   # Secrets (never commit) — RESEND_API_KEY, ALERT_EMAIL, PORT
 ├── CLAUDE.md              # This file — project reference for AI sessions
 └── public/
-    ├── index.html         # Entire single-page website (all sections in one file)
-    ├── favicon.svg        # Blue square with white serif "C" monogram
-    ├── preview.jpg        # 1200×630 OG image for iMessage/social link previews
+    ├── index.html            # Entire single-page website (all sections in one file)
+    ├── ClutchAutoBuyers.png  # Original full logo PNG (1799×874) — source of truth
+    ├── logo-header.png       # Cropped logo for header (1799×535) — wordmark only, no trust bar
+    ├── favicon-icon.png      # C+car icon cropped from logo — used as browser tab favicon
+    ├── preview.jpg           # 1200×630 OG image for iMessage/social link previews
     ├── css/
-    │   └── styles.css     # All styles — light theme, mobile-first, CSS variables
+    │   └── styles.css        # All styles — light theme, mobile-first, CSS variables
     └── js/
-        └── main.js        # Form validation, VIN decoder, photo upload, fetch POST
+        └── main.js           # Form validation, VIN decoder, photo upload, fetch POST
 ```
 
 ---
@@ -71,7 +73,7 @@ ClutchMotors/
 - **Mobile responsive** — tested on iPhone, header fits on one line at all sizes
 - **Header CTA buttons** — "Call Us Now" (outlined) and "Text Us Now" (solid blue, `sms:` link) side by side
 - **Link previews** — Open Graph + Twitter card meta tags; `preview.jpg` is the thumbnail image shown when link is shared in iMessage/social
-- **Favicon** — Blue square "C" monogram SVG
+- **Favicon** — C+car icon PNG (`favicon-icon.png`) cropped from logo
 - **Custom domain** — `www.clutchautobuyers.com` live with HTTPS via Railway
 - **Root domain redirect** — `clutchautobuyers.com` → `www.clutchautobuyers.com` via GoDaddy 301 forward
 - **SEO/social title** — "Clutch Auto Buyers — Sell Your Car Now"
@@ -94,7 +96,8 @@ ClutchMotors/
 | No emojis — SVG icons + HTML entities | Requested — emojis look playful; SVGs are crisp and professional on all screens. |
 | CSS custom properties for all colors | Easy to retheme without hunting through the file. |
 | `sms:` link for Text Us Now | Opens native Messages app on iPhone pre-addressed to owner's number. |
-| OG preview image generated via SVG→sharp | Needed a 1200×630 JPG for iMessage link previews; SVG favicons don't work for that. |
+| OG preview image generated via Swift/AppKit | Needed a 1200×630 JPG for iMessage link previews; white background + centered logo-header.png. Use Swift CGContext to composite — sips is unreliable for non-center crops. |
+| logo-header.png cropped at exactly 535px | Logo content ends at row ~500, trust bar starts at row ~550. 535px captures full wordmark with clean padding and nothing extra. CGImage uses top-left origin. |
 | GoDaddy Forward Domain (301) for root | CNAME on `@` is not allowed by DNS spec. GoDaddy's "Forward Domain" does the redirect at the registrar level. |
 
 ---
@@ -152,10 +155,14 @@ Railway environment variables are set in the Railway dashboard under the project
 ## Changelog
 
 ### 2026-04-24
-- Added logo image to header: replaced CLUTCH / AUTO BUYERS text spans with `<img src="ClutchAutoBuyers.png">` (1799x874 PNG provided by user, generated via ChatGPT)
-- Created `favicon-icon.png` by cropping just the C+car icon portion from the logo PNG (Swift/AppKit crop: x=0, y=340, w=560, h=500)
+- Added logo image to header: replaced CLUTCH / AUTO BUYERS text spans with `<img src="logo-header.png" class="logo-img">` inside `<a href="#" class="logo">`
+- Source logo: `ClutchAutoBuyers.png` (1799×874 PNG, white background, provided by user)
+- Created `logo-header.png` by cropping top 535px of source logo — captures full C+car icon + CLUTCH AUTO BUYERS wordmark, stops before the trust bar row (which starts at ~row 550)
+- Created `favicon-icon.png` — C+car icon cropped from logo; user cropped final version themselves
 - Updated favicon link from `favicon.svg` to `favicon-icon.png`
-- Footer logo remains as text (PNG has white background — would clash with dark footer)
+- Footer logo remains as text (PNG has white background — would clash with dark `#0f1923` footer)
+- Regenerated `preview.jpg` (1200×630 OG image): white background, `logo-header.png` centered at 310px height, "clutchautobuyers.com" in gray below — generated via Swift/AppKit CGContext
+- Bumped `og:image` URL to `?v=7` to force iMessage cache refresh; user manually cropped and replaced `preview.jpg` for final centered version
 
 ### 2026-04-20
 - SEO pass: updated title tag and meta description with Inland Empire/local keywords, added canonical link, added Schema.org AutoDealer JSON-LD structured data with areaServed cities (Riverside, San Bernardino, Ontario, Fontana, Moreno Valley, Rancho Cucamonga), added location text to hero sub and footer, created robots.txt and sitemap.xml
