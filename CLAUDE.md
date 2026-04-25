@@ -154,6 +154,11 @@ Railway environment variables are set in the Railway dashboard under the project
 
 ## Changelog
 
+### 2026-04-24 (continued)
+- Fixed logo vertical alignment in header: original PNG had 179px of whitespace at top, causing logo to appear lower than buttons despite `align-items: center`. Fixed by recropping `logo-header.png` to y=164–511 (347px tall) — equal ~15px padding on each side of the content.
+- Final logo sizes: 54px desktop, 32px mobile. Header height: 68px.
+- `logo-header.png` is now 1799×347 (tight crop, content-centered)
+
 ### 2026-04-24
 - Added logo image to header: replaced CLUTCH / AUTO BUYERS text spans with `<img src="logo-header.png" class="logo-img">` inside `<a href="#" class="logo">`
 - Source logo: `ClutchAutoBuyers.png` (1799×874 PNG, white background, provided by user)
