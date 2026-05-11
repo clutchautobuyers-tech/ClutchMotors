@@ -50,14 +50,17 @@ ClutchMotors/
 ├── CLAUDE.md              # This file — project reference for AI sessions
 └── public/
     ├── index.html            # Entire single-page website (all sections in one file)
-    ├── ClutchAutoBuyers.png  # Original full logo PNG (1799×874) — source of truth
-    ├── logo-header.png       # Cropped logo for header (1799×535) — wordmark only, no trust bar
-    ├── favicon-icon.png      # C+car icon cropped from logo — used as browser tab favicon
-    ├── preview.jpg           # 1200×630 OG image for iMessage/social link previews
+    ├── ClutchAutoBuyers.png      # Original full logo PNG (1799×874) — source of truth, never overwrite
+    ├── logo-header.png           # Cropped logo for header (1799×347) — tight crop, content-centered, no trust bar
+    ├── favicon-icon.png          # C+car icon cropped from logo — used as browser tab favicon
+    ├── preview.jpg               # 1200×630 OG image for iMessage/social link previews
+    ├── robots.txt                # Allows all crawlers, points to sitemap
+    ├── sitemap.xml               # Single URL sitemap for Google Search Console
+    ├── googleaa17a259d963115d.html  # Google Search Console verification file
     ├── css/
-    │   └── styles.css        # All styles — light theme, mobile-first, CSS variables
+    │   └── styles.css            # All styles — light theme, mobile-first, CSS variables
     └── js/
-        └── main.js           # Form validation, VIN decoder, photo upload, fetch POST
+        └── main.js               # Form validation, VIN decoder, photo upload, fetch POST
 ```
 
 ---
@@ -71,6 +74,7 @@ ClutchMotors/
 - **Rate limiting** — 5 requests per IP per 15 minutes, proxy-aware (`trust proxy: 1` for Railway)
 - **Form UX** — loading spinner, success state (hides form, shows confirmation), inline field validation errors, error banner with phone fallback
 - **Mobile responsive** — tested on iPhone, header fits on one line at all sizes
+- **Header logo sizes** — 54px desktop, 32px mobile; header height 68px; logo-header.png cropped tight (1799×347) so centering aligns with buttons
 - **Header CTA buttons** — "Call Us Now" (outlined) and "Text Us Now" (solid blue, `sms:` link) side by side
 - **Link previews** — Open Graph + Twitter card meta tags; `preview.jpg` is the thumbnail image shown when link is shared in iMessage/social
 - **Favicon** — C+car icon PNG (`favicon-icon.png`) cropped from logo
@@ -97,7 +101,7 @@ ClutchMotors/
 | CSS custom properties for all colors | Easy to retheme without hunting through the file. |
 | `sms:` link for Text Us Now | Opens native Messages app on iPhone pre-addressed to owner's number. |
 | OG preview image generated via Swift/AppKit | Needed a 1200×630 JPG for iMessage link previews; white background + centered logo-header.png. Use Swift CGContext to composite — sips is unreliable for non-center crops. |
-| logo-header.png cropped at exactly 535px | Logo content ends at row ~500, trust bar starts at row ~550. 535px captures full wordmark with clean padding and nothing extra. CGImage uses top-left origin. |
+| logo-header.png cropped to 347px (y=164–511) | Content starts at row 179, ends at row 496. Crop gives ~15px equal padding each side so `align-items: center` visually aligns with header buttons. CGImage uses top-left origin — not bottom-left like NSImage. |
 | GoDaddy Forward Domain (301) for root | CNAME on `@` is not allowed by DNS spec. GoDaddy's "Forward Domain" does the redirect at the registrar level. |
 
 ---
