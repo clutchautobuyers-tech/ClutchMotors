@@ -142,6 +142,67 @@ git add -A && git commit -m "your message" && git push
 ```
 Railway environment variables are set in the Railway dashboard under the project's Variables tab.
 
+This repo uses SSH for GitHub — no passwords or tokens needed. SSH key: `~/.ssh/id_clutchautobuyers`, remote set to `git@github-clutch:clutchautobuyers-tech/ClutchMotors.git`.
+
+---
+
+## Git / SSH Setup (one-time per machine)
+SSH is configured so `git push` works without passwords. Each GitHub account gets its own key.
+
+**How it works:**
+- `~/.ssh/config` maps aliases (e.g. `github-clutch`) to the right key for each account
+- Each repo's remote URL uses the alias instead of plain `github.com`
+
+**For a new GitHub account on the same Mac:**
+```bash
+# 1. Generate a new key (replace name and email)
+ssh-keygen -t ed25519 -C "email@gmail.com" -f ~/.ssh/id_newproject
+
+# 2. Add public key to the new GitHub account
+cat ~/.ssh/id_newproject.pub
+# Copy output → GitHub → Settings → SSH keys → New SSH key
+
+# 3. Add a new block to ~/.ssh/config:
+#   Host github-newproject
+#     HostName github.com
+#     User git
+#     IdentityFile ~/.ssh/id_newproject
+
+# 4. Add key to agent
+ssh-add ~/.ssh/id_newproject
+
+# 5. Test
+ssh -T git@github-newproject
+
+# 6. Set the repo remote to use the alias
+git remote set-url origin git@github-newproject:username/reponame.git
+```
+
+---
+
+## Starting a New Project (template guide)
+When building a similar site for a new client, do this:
+
+**1. Copy this CLAUDE.md into the new project folder and update:**
+- Company name, owner name, business description
+- Email address (ALERT_EMAIL)
+- Phone number
+- Domain name
+- GitHub repo URL
+- Clear out the "What's Working" section and rewrite for the new site
+- Clear out "Testimonials" and replace with the new client's
+- Clear out the entire "Changelog" and start fresh
+- Keep: Instructions for Claude, Tech Stack, Design Decisions, How to Run Locally, Environment Variables, Deployment, Git/SSH Setup
+
+**2. Tell Claude at the start of each session:**
+> "Read CLAUDE.md first. We're building [describe the site]. Here's what I want today: [task]."
+
+**3. Rules Claude must follow (already in Instructions section above):**
+- Read CLAUDE.md before touching any code
+- Update the Changelog every single session with date, what changed, and why
+- Commit CLAUDE.md to GitHub after every update
+- Keep all sections current as the project evolves
+
 ---
 
 ## Testimonials (current)
@@ -157,6 +218,11 @@ Railway environment variables are set in the Railway dashboard under the project
 ---
 
 ## Changelog
+
+### 2026-05-10
+- Set up SSH authentication for GitHub — no more tokens. Key: `~/.ssh/id_clutchautobuyers`, SSH config alias: `github-clutch`, remote updated to SSH URL.
+- Added Git/SSH Setup section to CLAUDE.md with instructions for adding new accounts
+- Added Starting a New Project section with template guide for future client sites
 
 ### 2026-04-24 (continued)
 - Fixed logo vertical alignment in header: original PNG had 179px of whitespace at top, causing logo to appear lower than buttons despite `align-items: center`. Fixed by recropping `logo-header.png` to y=164–511 (347px tall) — equal ~15px padding on each side of the content.
