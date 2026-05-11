@@ -180,31 +180,6 @@ git remote set-url origin git@github-newproject:username/reponame.git
 
 ---
 
-## Starting a New Project (template guide)
-When building a similar site for a new client, do this:
-
-**1. Copy this CLAUDE.md into the new project folder and update:**
-- Company name, owner name, business description
-- Email address (ALERT_EMAIL)
-- Phone number
-- Domain name
-- GitHub repo URL
-- Clear out the "What's Working" section and rewrite for the new site
-- Clear out "Testimonials" and replace with the new client's
-- Clear out the entire "Changelog" and start fresh
-- Keep: Instructions for Claude, Tech Stack, Design Decisions, How to Run Locally, Environment Variables, Deployment, Git/SSH Setup
-
-**2. Tell Claude at the start of each session:**
-> "Read CLAUDE.md first. We're building [describe the site]. Here's what I want today: [task]."
-
-**3. Rules Claude must follow (already in Instructions section above):**
-- Read CLAUDE.md before touching any code
-- Update the Changelog every single session with date, what changed, and why
-- Commit CLAUDE.md to GitHub after every update
-- Keep all sections current as the project evolves
-
----
-
 ## Testimonials (current)
 | Name | Vehicle | Initial |
 |---|---|---|
@@ -222,7 +197,7 @@ When building a similar site for a new client, do this:
 ### 2026-05-10
 - Set up SSH authentication for GitHub — no more tokens. Key: `~/.ssh/id_clutchautobuyers`, SSH config alias: `github-clutch`, remote updated to SSH URL.
 - Added Git/SSH Setup section to CLAUDE.md with instructions for adding new accounts
-- Added Starting a New Project section with template guide for future client sites
+- Removed "Starting a New Project" section — user copied it to their other project; this file is Clutch-only going forward
 
 ### 2026-04-24 (continued)
 - Fixed logo vertical alignment in header: original PNG had 179px of whitespace at top, causing logo to appear lower than buttons despite `align-items: center`. Fixed by recropping `logo-header.png` to y=164–511 (347px tall) — equal ~15px padding on each side of the content.
